@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>I'm Sorry</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffd6d6, #ffe6f0);
+      font-family: Arial, sans-serif;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      max-width: 320px;
+    }
+
+    img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      color: #ff4d6d;
+    }
+
+    p {
+      color: #555;
+      margin-bottom: 20px;
+      white-space: pre-line;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .yes {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    .no {
+      background: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <img id="image" src="">
+
+    <h1 id="title">I'm sorry baby 💔</h1>
+    <p id="message"></p>
+
+    <div id="buttons"></div>
+  </div>
+
+  <script>
+    let noCount = 0;
+
+    const images = [
+      "https://i.pinimg.com/originals/4c/e8/31/4ce831be8a5461c45b8e3dc582a4c49d.jpg",
+      "https://i.pinimg.com/originals/cd/b6/5a/cdb65a2d39458cbc014c09a768c26976.jpg",
+      "https://i.pinimg.com/originals/ff/3f/93/ff3f93f336bd451bb593dc436f856250.jpg",
+      "https://i.pinimg.com/originals/20/50/a8/2050a80d1e1e00ea98424d6f9832db96.jpg",
+      "https://i.pinimg.com/originals/e5/0e/c7/e50ec71dc97bccd8bb44a62587cae1ff.jpg",
+      "https://i.pinimg.com/originals/87/ff/ee/87ffee049a55c5e6ab0687c5c5aadb6a.jpg",
+      "https://i.pinimg.com/originals/03/c6/30/03c630946b7c670cbdf280c6278373c3.jpg",
+      "https://i.pinimg.com/originals/c4/ee/12/c4ee12aedc4c4b21dadfc594536c01f1.jpg",
+      "https://i.pinimg.com/originals/21/9c/1c/219c1ccb8e7a4f0f18639d03ad7ab9db.jpg",
+      "https://i.pinimg.com/originals/a4/1f/25/a41f2564977c7e8a3bc5ca7f52209f95.jpg"
+    ];
+
+    function randomImage() {
+      return images[Math.floor(Math.random() * images.length)];
+    }
+
+    function updateUI(title, message, buttons) {
+      document.getElementById("title").innerText = title;
+      document.getElementById("message").innerText = message;
+
+      let btnHTML = "";
+      buttons.forEach(btn => {
+        btnHTML += `<button class="${btn.class}" onclick="${btn.action}">${btn.text}</button>`;
+      });
+
+      document.getElementById("buttons").innerHTML = btnHTML;
+      document.getElementById("image").src = randomImage();
+    }
+
+    // Start
+    updateUI(
+      "I'm sorry baby 💔",
+      "",
+      [
+        { text: "Yes", class: "yes", action: "step1()" },
+        { text: "No", class: "no", action: "loopNo()" }
+      ]
+    );
+
+    function step1() {
+      updateUI(
+        "I am really sorry baby 🥺",
+        "I will try my best to not let this happen again",
+        [
+          { text: "hmmm.......", class: "yes", action: "step2()" },
+          { text: "noi...", class: "no", action: "loopNo()" }
+        ]
+      );
+    }
+
+    function step2() {
+      updateUI(
+        "I mean it ❤️",
+        `I'm really sorry baboo, I know you are hurt and I am sorry 🌻.
+I cannot let you go, the spark that I used to see in your eyes,
+The spark that I always wanted to fuel,
+The spark in those oceanic eyes,
+The way you used to look stunning in your blue kurtis,
+You look beautiful, that glow in your beauty,
+The way the sun makes them shine,
+I love you the very most,
+It troubles me a lot baby, please don't cry`,
+        [
+          { text: "its okay", class: "yes", action: "ending()" }
+        ]
+      );
+    }
+
+    function ending() {
+      updateUI(
+        "Thank you my love ❤️",
+        `I love you my lil trouble maker.
+I would still like to wake up and find you beside me in our bed.
+I will always love you.
+
+- yours SpongeBob 🌻`,
+        []
+      );
+    }
+
+    function loopNo() {
+      noCount++;
+
+      const messages = [
+        "Still no? That hurts 😭",
+        "Okay… I deserve that… but I’m really sorry",
+        "You’re too stubborn… but I’m still here trying",
+        "At this point I respect your consistency",
+        "I won’t stop… because you matter to me",
+        "Last chance? 🥺",
+        "Okay but I'm not going to let you go 😭",
+        "But still… I’m sorry"
+      ];
+
+      updateUI(
+        "Please… 💔",
+        messages[noCount % messages.length],
+        [
+          { text: "hmmm.......", class: "yes", action: "step2()" },
+          { text: "noi...", class: "no", action: "loopNo()" }
+        ]
+      );
+    }
+  </script>
+
+</body>
+</html>
